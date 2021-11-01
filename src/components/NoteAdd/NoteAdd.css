@@ -91,15 +91,15 @@ button {
   background-color: #8661d1;
   border: none;
   border-radius: 15px;
-  box-shadow: 0 9px #999;
+  box-shadow: 0 5px rgb(109, 57, 129);
 }
 
 button:hover {
-  background-color: #fd5252;
+  background-color: #906ed3;
 }
 
 button:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
+  background-color: #fd5252e5;
+  box-shadow: 0 5px rgb(212, 93, 93);
   transform: translateY(4px);
 }
