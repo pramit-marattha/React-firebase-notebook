@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import * as firebase from "firebase";
+import firebase from "firebase/compat/app";
+import "firebase/compat/database";
 import "./NoteAdd.css";
 
 const NoteAdd = () => {
@@ -34,7 +35,7 @@ const NoteAdd = () => {
             name="noteadd-header"
             placeholder="Note Title"
             value={title}
-            onChange={handleTitleChange(event)}
+            onChange={(val) => handleTitleChange(val)}
           />
         </div>
         <div className="form-group">
@@ -43,7 +44,7 @@ const NoteAdd = () => {
             className="noteadd-description"
             placeholder="Note Description"
             value={description}
-            onChange={handleDescriptionChange(event)}
+            onChange={(val) => handleDescriptionChange(val)}
           ></textarea>
         </div>
         <div className="noteadd-button">

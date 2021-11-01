@@ -1,5 +1,6 @@
 import React from "react";
-import * as firebase from "firebase";
+import firebase from "firebase/compat/app";
+import "firebase/compat/database";
 import Navbar from "./components/Navbar";
 import NoteAdd from "./components/NoteAdd";
 
