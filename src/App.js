@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import Navbar from "./components/Navbar";
 import NoteAdd from "./components/NoteAdd";
-
+import Notebook from "./components/Notebook";
 import "./App.css";
 
 const firebaseConfig = {
@@ -20,11 +20,43 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const App = () => {
+  const [notes, setNotes] = useState([]);
+
+  const listenForChange = () => {
+    firebase
+      .database()
+      .ref("notebook")
+      .on("child_added", (snapshot) => {
+        let note = {
+          id: snapshot.key,
+          title: snapshot.val().title,
+          description: snapshot.val().description,
+        };
+        let notebook = notes;
+        notebook.push(note);
+        setNotes([...notes]);
+      });
+
+    firebase
+      .database()
+      .ref("notebook")
+      .on("child_removed", (snapshot) => {
+        let notebook = notes;
+        notebook = notes.filter((note) => note.id !== snapshot.key);
+        setNotes(notebook);
+      });
+  };
+
+  useEffect(() => {
+    listenForChange();
+  }, []);
+
   return (
     <div className="app">
       <Navbar />
       <div className="note-section">
         <NoteAdd />
+        <Notebook notebook={notes} />
       </div>
     </div>
   );

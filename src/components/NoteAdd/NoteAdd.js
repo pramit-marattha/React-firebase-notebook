@@ -17,7 +17,7 @@ const NoteAdd = () => {
 
   const addNote = () => {
     if (title !== "" && description !== "") {
-      firebase.database().ref("notes").push({
+      firebase.database().ref("notebook").push({
         title: title,
         description: description,
       });
