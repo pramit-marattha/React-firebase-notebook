@@ -10,22 +10,21 @@ const Notebook = (props) => {
 
   return (
     <>
-      <section className="notes-wrapper">
-        <h3>Notes</h3>
-        <div className="notes">
+      <section className="notebook-container">
+        <div className="notebook">
           {props.notebook.map((note, index) => (
             <React.Fragment key={index}>
-              <div className="note" key={note.id}>
-                <div className="note-title">
+              <div className="notebookInfo" key={note.id}>
+                <div className="notebookInfo-title">
                   <h3>{note.title}</h3>
                   <div
                     className="remove"
                     onClick={() => deleteNotebook(note.id)}
                   >
-                    x
+                    🗑️
                   </div>
                 </div>
-                <div className="note-content">
+                <div className="notebookInfo-description">
                   <p>{note.description}</p>
                 </div>
               </div>
