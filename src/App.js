@@ -20,7 +20,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const App = () => {
-  const [notes, setNotes] = useState([]);
+  const [noteBookData, setNoteBookData] = useState([]);
 
   const listenForChange = () => {
     firebase
@@ -32,18 +32,18 @@ const App = () => {
           title: snapshot.val().title,
           description: snapshot.val().description,
         };
-        let notebook = notes;
+        let notebook = noteBookData;
         notebook.push(note);
-        setNotes([...notes]);
+        setNoteBookData([...noteBookData]);
       });
 
     firebase
       .database()
       .ref("notebook")
       .on("child_removed", (snapshot) => {
-        let notebook = notes;
-        notebook = notes.filter((note) => note.id !== snapshot.key);
-        setNotes(notebook);
+        let notebook = noteBookData;
+        notebook = noteBookData.filter((note) => note.id !== snapshot.key);
+        setNoteBookData(notebook);
       });
   };
 
@@ -56,7 +56,7 @@ const App = () => {
       <Navbar />
       <div className="note-section">
         <NoteAdd />
-        <Notebook notebook={notes} />
+        <Notebook notebook={noteBookData} />
       </div>
     </div>
   );
