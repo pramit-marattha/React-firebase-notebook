@@ -22,7 +22,7 @@ firebase.initializeApp(firebaseConfig);
 const App = () => {
   const [noteBookData, setNoteBookData] = useState([]);
 
-  const listenForChange = () => {
+  const updateNotes = () => {
     firebase
       .database()
       .ref("notebook")
@@ -48,7 +48,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    listenForChange();
+    updateNotes();
   }, []);
 
   return (
